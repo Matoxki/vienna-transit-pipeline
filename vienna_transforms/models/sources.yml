@@ -1,0 +1,9 @@
+version: 2
+
+sources:
+  - name: vienna_raw
+    database: data-eng-portfolio-1
+    schema: raw_vienna_data
+    tables:
+      - name: raw_weather
+      - name: raw_transit

@@ -55,12 +55,12 @@ def load_transit_to_bq():
     if response.status_code == 200:
         raw_json = response.json()
         
-        # 1. Extract the station and line info from the JSON payload
+        # Extract the station and line info from the JSON payload
         monitor = raw_json['data']['monitors'][0]
         stop_name = monitor['locationStop']['properties']['title']
         line_name = monitor['lines'][0]['name']
         
-        # 2. Create the clean dictionary
+        # Create the clean dictionary
         row_to_insert = [
             {
                 "stop_id": "4116",
@@ -70,7 +70,7 @@ def load_transit_to_bq():
             }
         ]
         
-        # 3. Define target table (Notice it's a new table name: raw_transit)
+        # Define target table (Notice it's a new table name: raw_transit)
         table_id = "data-eng-portfolio-1.raw_vienna_data.raw_transit"
         
         print("Uploading transit data to BigQuery...")
@@ -87,7 +87,7 @@ def load_transit_to_bq():
     else:
         print(f"API Error: {response.status_code}")
 
-# --- UPDATE YOUR MAIN BLOCK TO RUN BOTH FUNCTIONS ---
+# UPDATE YOUR MAIN BLOCK TO RUN BOTH FUNCTIONS 
 if __name__ == "__main__":
     load_weather_to_bq()
     load_transit_to_bq()
