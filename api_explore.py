@@ -15,7 +15,7 @@ def fetch_transit_data():
     if response.status_code == 200:
         transit_data = response.json()
         print("Success! Here is the raw location data for this stop:")
-        # We navigate the JSON dictionary to print just the location details
+        # I navigate the JSON dictionary to print just the location details
         print(json.dumps(transit_data['data']['monitors'][0]['locationStop'], indent=2))
     else:
         print(f"Failed to fetch data. Error: {response.status_code}")
@@ -33,12 +33,12 @@ def fetch_weather_data():
     if response.status_code == 200:
         weather_data = response.json()
         print("Success! Here are the requested weather parameters (Temp & Precipitation):")
-        # We navigate the JSON dictionary to print just the weather readings
+        # I navigate the JSON dictionary to print just the weather readings
         print(json.dumps(weather_data['features'][0]['properties']['parameters'], indent=2))
     else:
         print(f"Failed to fetch data. Error: {response.status_code}")
 
-# This tells Python to run our two functions when we execute the script
+# This tells Python to run the two functions when I execute the script
 if __name__ == "__main__":
     fetch_transit_data()
     fetch_weather_data()

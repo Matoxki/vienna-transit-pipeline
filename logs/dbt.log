@@ -79,3 +79,19 @@ Happy modeling!
 [0m17:02:22.946208 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'end', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x1423d8050>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x1151a1a30>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x141499040>]}
 [0m17:02:22.946447 [debug] [MainThread]: Flushing usage events
 [0m17:02:23.598738 [debug] [MainThread]: An error was encountered while trying to flush usage events
+[0m18:22:42.070710 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'start', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x108bf1160>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x10a9b7390>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x10a9b7750>]}
+
+
+============================== 18:22:42.073397 | dbc5c120-1a73-4092-bffc-028aff4c1e1d ==============================
+[0m18:22:42.073397 [info ] [MainThread]: Running with dbt=1.12.0
+[0m18:22:42.073687 [debug] [MainThread]: running dbt with arguments {'quiet': 'False', 'empty': 'False', 'maximum_seed_size_mib': '1', 'version_check': 'True', 'log_format': 'default', 'write_json': 'True', 'target_path': 'None', 'log_cache_events': 'False', 'use_colors': 'True', 'cache_selected_only': 'False', 'warn_error_options': 'WarnErrorOptionsV2(error=[], warn=[], silence=[])', 'static_parser': 'True', 'profiles_dir': '/Users/matoxki/.dbt', 'no_print': 'None', 'use_experimental_parser': 'False', 'partial_parse': 'True', 'debug': 'False', 'indirect_selection': 'eager', 'send_anonymous_usage_stats': 'True', 'fail_fast': 'False', 'warn_error': 'None', 'invocation_command': 'dbt run', 'hints_enabled': 'True', 'introspect': 'True', 'printer_width': '80', 'log_path': 'logs'}
+[0m18:22:42.073936 [error] [MainThread]: [[31mERROR[0m]: Encountered an error:
+Runtime Error
+  No dbt_project.yml found at expected path /Users/matoxki/Documents/vienna_transit_pipeline/dbt_project.yml
+  Verify that each entry within packages.yml (and their transitive dependencies) contains a file named dbt_project.yml
+  
+[0m18:22:42.075764 [debug] [MainThread]: Resource report: {"command_name": "run", "command_success": false, "command_wall_clock_time": 0.04261942, "process_in_blocks": "0", "process_kernel_time": 0.143376, "process_mem_max_rss": "127025152", "process_out_blocks": "0", "process_user_time": 0.527709}
+[0m18:22:42.075953 [debug] [MainThread]: Command `dbt run` failed at 18:22:42.075914 after 0.04 seconds
+[0m18:22:42.076078 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'end', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x10aa3c510>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x10aa01a30>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x10aa09480>]}
+[0m18:22:42.076191 [debug] [MainThread]: Flushing usage events
+[0m18:22:42.680386 [debug] [MainThread]: An error was encountered while trying to flush usage events

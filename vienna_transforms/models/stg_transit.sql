@@ -9,7 +9,7 @@ deduplicated_data AS (
         stop_id,
         stop_name,
         line_name,
-        -- We cast the string timestamp from Python into a true BigQuery Timestamp
+        -- Cast the string timestamp from Python into a true BigQuery Timestamp
         CAST(ingestion_timestamp AS TIMESTAMP) AS updated_at,
         
         -- The Magic Window Function:
@@ -21,7 +21,7 @@ deduplicated_data AS (
     FROM raw_data
 )
 
--- We filter to ONLY keep the newest record (row_num = 1)
+-- Filter to ONLY keep the newest record (row_num = 1)
 SELECT
     stop_id,
     stop_name,

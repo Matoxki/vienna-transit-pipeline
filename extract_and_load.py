@@ -87,7 +87,7 @@ def load_transit_to_bq():
     else:
         print(f"API Error: {response.status_code}")
 
-# UPDATE YOUR MAIN BLOCK TO RUN BOTH FUNCTIONS 
+# update the main block to run both functions 
 if __name__ == "__main__":
     load_weather_to_bq()
     load_transit_to_bq()
