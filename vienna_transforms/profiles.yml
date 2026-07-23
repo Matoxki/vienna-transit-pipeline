@@ -1,0 +1,12 @@
+vienna_transforms:
+  target: dev
+  outputs:
+    dev:
+      type: bigquery
+      method: service-account
+      keyfile: /opt/airflow/dags/vienna_transit_pipeline/service_account_key.json
+      project: data-eng-portfolio-1
+      dataset: dbt_staging
+      location: EU
+      threads: 4
+      timeout_seconds: 300

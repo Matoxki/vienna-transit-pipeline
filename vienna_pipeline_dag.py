@@ -24,19 +24,18 @@ with DAG(
     tags=['vienna', 'modern_data_stack', 'dbt', 'bigquery'],
 ) as dag:
 
-    # Task 1: Run the Python extraction script to pull API data and load it into BigQuery
+# Task 1: Run the Python extraction script to pull API data and load it into BigQuery
     run_python_extraction = BashOperator(
         task_id='extract_and_load_api_data',
-        bash_command='python3 /Users/matoxki/Documents/vienna_transit_pipeline/extract_and_load.py',
-    )
+        bash_command='export GOOGLE_APPLICATION_CREDENTIALS="/opt/airflow/dags/vienna_transit_pipeline/service_account_key.json" && python3 /opt/airflow/dags/vienna_transit_pipeline/extract_and_load.py',
+)
 
-    # Task 2: Run dbt transformations to update our Silver staging and Gold mart tables
-    # Note: We navigate into the dbt project folder first, exactly like we do in the terminal!
+# Task 2: Run dbt transformations to update our Silver staging and Gold mart tables
     run_dbt_transformations = BashOperator(
         task_id='run_dbt_models',
-        bash_command='cd /Users/matoxki/Documents/vienna_transit_pipeline/vienna_transforms && dbt run',
-    )
+        bash_command='export PATH=$PATH:/home/airflow/.local/bin && cd /opt/airflow/dags/vienna_transit_pipeline/vienna_transforms && dbt run --profiles-dir .',
+)
 
-    # Defining the pipeline dependency chain:
-    # Python Extraction MUST finish successfully before dbt transformations are allowed to run.
+# Defining the pipeline dependency chain:
+# Python Extraction MUST finish successfully before dbt transformations are allowed to run.
     run_python_extraction >> run_dbt_transformations
