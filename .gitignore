@@ -1,3 +1,11 @@
 venv/
+pycache/
+*.pyc
+
+service_account_key.json
+
+analytics/target/
+analytics/logs/
+analytics/dbt_packages/
+
 .DS_Store
-*.json
