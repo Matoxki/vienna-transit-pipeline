@@ -1,4 +1,3 @@
-# Vienna Urban Mobility & Weather Pipeline
 🚧 **Project Status: Active Development** 🚧
 
 Successfully expanded to 5 major multi-modal transit hubs (U1 to U6 lines) with localized weather station mapping, and currently transitioning from manual execution to automated Apache Airflow orchestration.
