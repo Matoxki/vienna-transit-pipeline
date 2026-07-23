@@ -1,22 +1,27 @@
 WITH transit AS (
-    --  Use 'ref' here to grab our clean, deduplicated Silver data
+    -- Grab our clean, deduplicated Silver data from the transit staging model
     SELECT * FROM {{ ref('stg_transit') }}
 ),
 
 weather AS (
-    --  Use 'ref' here to grab our clean, deduplicated Silver data
+    -- Grab our clean, deduplicated Silver data from the weather staging model
     SELECT * FROM {{ ref('stg_weather') }}
 )
 
--- Because 1 am building a hyper-local dashboard tracking exactly 1 transit stop 
--- and 1 weather station, I will simply combine them into a single row using a CROSS JOIN.
--- (Since the staging models ensure there is only 1 row in each table, 1 x 1 = 1 row!)
+-- Instead of a global CROSS JOIN which duplicates un-related data,
+-- we now perform an explicit INNER JOIN using our relational station mapping key!
 SELECT
+    t.stop_id,
     t.stop_name,
     t.line_name,
-    w.temperature_celsius,
-    w.precipitation_mm,
+    t.time_planned,
+    t.time_real,
+    t.delay_seconds,
+    w.station_id AS matched_weather_station_id,
+    w.temperature AS temperature_celsius,
+    w.precipitation AS precipitation_mm,
     t.updated_at AS transit_last_updated,
     w.updated_at AS weather_last_updated
 FROM transit t
-CROSS JOIN weather w
+INNER JOIN weather w 
+    ON t.nearest_weather_station_id = w.station_id

@@ -1,31 +1,32 @@
 WITH raw_data AS (
-    -- dbt uses the Address Book here to find the raw table!
-    SELECT * 
-    FROM {{ source('vienna_raw', 'raw_transit') }}
+    SELECT * FROM {{ source('vienna_raw', 'raw_transit') }}
 ),
 
 deduplicated_data AS (
-    SELECT
+    SELECT 
         stop_id,
         stop_name,
         line_name,
-        -- Cast the string timestamp from Python into a true BigQuery Timestamp
+        time_planned,
+        time_real,
+        delay_seconds,
+        CAST(nearest_weather_station_id AS STRING) AS nearest_weather_station_id,
         CAST(ingestion_timestamp AS TIMESTAMP) AS updated_at,
-        
-        -- The Magic Window Function:
-        -- It groups by the station and line, sorts by the newest time, and assigns row #1 to the newest record.
         ROW_NUMBER() OVER (
-            PARTITION BY stop_id, line_name 
+            PARTITION BY stop_id 
             ORDER BY ingestion_timestamp DESC
         ) as row_num
     FROM raw_data
 )
 
--- Filter to ONLY keep the newest record (row_num = 1)
-SELECT
+SELECT 
     stop_id,
     stop_name,
     line_name,
+    time_planned,
+    time_real,
+    delay_seconds,
+    nearest_weather_station_id,
     updated_at
 FROM deduplicated_data
 WHERE row_num = 1
